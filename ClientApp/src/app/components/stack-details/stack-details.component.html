@@ -6,9 +6,17 @@
   <button (click)="createCard(card)" class="m-1 p-1 bg-slate-400 text-slate-50 rounded-md hover:bg-slate-600">Create</button>
   <div class="flex flex-row">
     <div *ngFor="let card of cards" class="drop-shadow-lg bg-slate-100 m-1 p-3 h-64 w-64 border rounded hover:bg-slate-200 hover:scale-105">
-      <p>Q: {{ card.question }}</p> 
-      <p>A: {{ card.answer }}</p> 
+      <div *ngIf="!edit">
+        <button (click)="toggleEdit()">Edit</button>
+        <p>Q: {{ card.question }}</p> 
+        <p>A: {{ card.answer }}</p> 
+      </div>
+      <div *ngIf="edit">
+        <input [(ngModel)]="card.question" type="text" name="Question" value="{{card.question}}" placeholder="Question" class="m-1">
+        <input [(ngModel)]="card.answer" type="text" name="Answer" value="{{card.answer}}" placeholder="Answer" class="m-1">
+       <button (click)="saveEdit(card)">Save</button> 
+      </div>
     </div>
   </div>
 </div>
-<app-study-flashcards *ngIf="study" [stack]="stack"></app-study-flashcards>
+<app-study-flashcards (exitStudyEvent)="toggleStudy()" *ngIf="study" [stack]="stack"></app-study-flashcards>

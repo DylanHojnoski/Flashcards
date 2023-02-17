@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Card } from 'src/app/models/card';
 import { Stack } from 'src/app/models/stack';
 import { CardService } from 'src/app/services/card.service';
@@ -10,6 +10,7 @@ import { CardService } from 'src/app/services/card.service';
 })
 export class StudyFlashcardsComponent implements OnInit {
   cards : Card[] = new Array();
+  @Output() exitStudyEvent = new EventEmitter<boolean>();
   @Input() stack: Stack = new Stack;
   index = 0; 
   answerActive = false;
@@ -33,8 +34,12 @@ export class StudyFlashcardsComponent implements OnInit {
 
   previousCard(): void {
     if (this.index > 0) {
-      this.index == 1;
+      this.index -= 1;
       this.answerActive = false;
     }
+  }
+
+  exitStudy() {
+    this.exitStudyEvent.emit(false);
   }
 }

@@ -10,9 +10,10 @@ import { CardService } from 'src/app/services/card.service'
 })
 export class StackDetailsComponent implements OnInit {
   @Input() stack: Stack = new Stack;
-  cards?: Card[];
+  cards: Card[] = new Array;
   card: Card = new Card;
   study = false;
+  edit = false;
 
   constructor(private cardService: CardService) { }
 
@@ -31,7 +32,19 @@ export class StackDetailsComponent implements OnInit {
   }
 
   toggleStudy() {
-    this.study = !this.study;
+    if (this.cards.length > 0) {
+      this.study = !this.study;
+    } 
+  }
+
+  toggleEdit() {
+    this.edit = !this.edit;
+  }
+
+  saveEdit(card: Card) {
+    this.cardService.upateCard(card).subscribe();
+    this.cardService.getCardsInStack(this.stack).subscribe((results) => (this.cards = results));
+    this.toggleEdit();
   }
 
 }
