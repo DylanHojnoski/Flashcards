@@ -10,6 +10,7 @@ import { CardComponent } from './components/card/card.component';
 import {NavbarComponent} from './components/navbar/navbar.component';
 import {StudyFlashcardsComponent} from './components/study-flashcards/study-flashcards.component';
 import { CreateStackComponent } from './components/create-stack/create-stack.component';
+import { StackDetailsComponent } from './components/stack-details/stack-details.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { CreateStackComponent } from './components/create-stack/create-stack.com
     StudyFlashcardsComponent,
     NavbarComponent,
     CreateStackComponent,
+    StackDetailsComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),

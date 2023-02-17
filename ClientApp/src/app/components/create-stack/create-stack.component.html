@@ -1,8 +1,9 @@
-<div *ngIf="stack" class="flex justify-center items-center"> 
+<div *ngIf="stack" class="flex justify-center items-center "> 
   <input [(ngModel)]="stack.userId" type="number" placeholder="userId" class="m-1" > 
   <input [(ngModel)]="stack.name" type="text" placeholder="Name" class=m-1> 
     <label for="tags" class="m-1">Tag</label>
-  <select [(ngModel)]="stack.tag" name="tags" id="tags" placeholder="Tag" class="m-1">
+  <select [(ngModel)]="stack.tag" name="tags" d="tags" placeholder="Tag" class="m-1">
+    <option  value="None" selected="selected">None</option>
     <option  value="History">History</option>
     <option  value="STEM">Science</option>
     <option  value="English">English</option>

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Stack } from 'src/app/models/stack';
 import { StackService } from 'src/app/services/stack.service'
 
@@ -8,8 +8,9 @@ import { StackService } from 'src/app/services/stack.service'
   styleUrls: ['./stack.component.css']
 })
 export class StackComponent implements OnInit {
+  @Output() selectedStackEvent = new EventEmitter<Stack>();
   stacks?: Stack[];
-  activeStack: Stack = new Stack; 
+  selectedStack: Stack = new Stack; 
   isActiveStack = false;
 
   constructor(private stackService: StackService) { }
@@ -20,13 +21,9 @@ export class StackComponent implements OnInit {
 
   deleteStack(stack: Stack): void {
     this.stackService.deleteStack(stack).subscribe((result: Stack[]) => (this.stacks = result));
-    console.log("delete")
   }
 
-  setActiveStack(stack: Stack): void {
-    this.activeStack = stack;
-    this.isActiveStack = true
-    console.log("hi")
+  selectStack(stack: Stack): void {
+    this.selectedStackEvent.emit(stack)
   }
-
 }

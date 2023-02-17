@@ -8,6 +8,8 @@ import { Stack } from 'src/app/models/stack';
 })
 export class NavbarComponent implements OnInit {
   stackToEdit?: Stack;
+  shownStacks?: Stack[]
+  selectedStack?: Stack;
 
   constructor() { }
 
@@ -16,6 +18,14 @@ export class NavbarComponent implements OnInit {
 
   createStack() {
     this.stackToEdit = new Stack;
+  }
+
+  selectStack(stack: Stack) {
+    this.selectedStack = stack;
+  }
+
+  unselectStack() {
+    this.selectedStack = undefined;
   }
 
 }

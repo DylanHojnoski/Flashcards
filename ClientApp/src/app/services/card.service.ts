@@ -10,7 +10,7 @@ import { Stack } from '../models/stack';
 })
 
 export class CardService {
-  private url = "Card;"
+  private url = "Card"
   constructor(private http: HttpClient) { }
 
   public getCards() : Observable<Card[]> {

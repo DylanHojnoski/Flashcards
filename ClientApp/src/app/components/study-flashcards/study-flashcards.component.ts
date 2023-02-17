@@ -27,12 +27,14 @@ export class StudyFlashcardsComponent implements OnInit {
   nextCard(): void {
     if (this.index < this.cards.length - 1) {
       this.index += 1;
+      this.answerActive = false;
     }
   }
 
   previousCard(): void {
     if (this.index > 0) {
       this.index == 1;
+      this.answerActive = false;
     }
   }
 }
