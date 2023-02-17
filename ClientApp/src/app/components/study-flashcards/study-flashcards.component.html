@@ -1,0 +1,10 @@
+<div>
+  <div >
+    <h2>{{cards[index].question}}</h2>
+    <p *ngIf="answerActive">{{cards[index].answer}}</p>
+  </div>
+  <button ((click)="previousCard()")>Next Card</button>
+  <button ((click)="showAnswer()")>Show Answer</button>
+  <button ((click)="nextCard()")>Next Card</button>
+  
+</div>

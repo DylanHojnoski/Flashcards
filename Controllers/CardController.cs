@@ -19,6 +19,10 @@ namespace Flashcards.Controller {
         return Ok(await _context.Cards.ToListAsync());
       }
 
+      [HttpGet("{Stack}"), ActionName("GetByStack")] 
+      public async Task<ActionResult<List<Card>>> GetCardsInStack(Stack stack) {
+        return Ok(await _context.Cards.Where(card => card.StackId.Equals(stack.Id)).ToListAsync());
+      }
 
       [HttpPost]
       public async Task<ActionResult<List<Card>>> CreateCard(Card card) {

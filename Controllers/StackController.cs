@@ -19,7 +19,6 @@ namespace Flashcards.Controller {
         return Ok(await _context.Stacks.ToListAsync());
       }
 
-
       [HttpPost]
       public async Task<ActionResult<List<Stack>>> CreateStack(Stack stack) {
         _context.Stacks.Add(stack);
@@ -43,8 +42,8 @@ namespace Flashcards.Controller {
       }
       
       [HttpDelete("{id}")]
-      public async Task<ActionResult<List<Stack>>> DeleteStack(Stack stack) {
-        var dbStack = await _context.Stacks.FindAsync(stack.Id);
+      public async Task<ActionResult<List<Stack>>> DeleteStack(int id) {
+        var dbStack = await _context.Stacks.FindAsync(id);
         if (dbStack == null) {
           return BadRequest("Stack not found.");
         }

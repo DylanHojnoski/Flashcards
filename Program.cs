@@ -6,11 +6,15 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 
 builder.Services.AddControllersWithViews();
+builder.Services.AddControllers();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<DataContext>(options => {
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection"));
     });
-
+builder.Services.AddCors(options => options.AddPolicy(name: "Database", 
+      policy => {
+      policy.WithOrigins("https://localhost:44426").AllowAnyMethod().AllowAnyHeader().SetIsOriginAllowed((host) => true);
+      }));
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -24,7 +28,7 @@ else {
   app.UseSwaggerUI();
 }
 
-
+app.UseCors("Database"); 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseRouting();

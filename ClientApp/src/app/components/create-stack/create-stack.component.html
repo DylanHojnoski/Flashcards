@@ -1,0 +1,15 @@
+<div *ngIf="stack" class="flex justify-center items-center"> 
+  <input [(ngModel)]="stack.userId" type="number" placeholder="userId" class="m-1" > 
+  <input [(ngModel)]="stack.name" type="text" placeholder="Name" class=m-1> 
+    <label for="tags" class="m-1">Tag</label>
+  <select [(ngModel)]="stack.tag" name="tags" id="tags" placeholder="Tag" class="m-1">
+    <option  value="History">History</option>
+    <option  value="STEM">Science</option>
+    <option  value="English">English</option>
+    <option  value="Foreign Language">Foreign Language</option>
+  </select>
+  <input [(ngModel)]="stack.public" type="checkbox" name="Public" value="Public" class="m-1">
+    <label for="Public" class="m-1">Public</label>
+  <button (click)="createStack(stack)" class="m-1 p-1 bg-slate-400 text-slate-50 rounded-md hover:bg-slate-600">Create</button>
+  <button (click)="cancelStack()" class="m-1 bg-red-200 rounded-md p-1 hover:bg-red-400">Cancel</button>
+</div>

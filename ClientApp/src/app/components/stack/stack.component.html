@@ -1,0 +1,12 @@
+<div *ngIf="activeStack"class="flex flex-wrap flex-row justify-center min-w-full">
+<div *ngFor="let stack of stacks">
+  <button (click)="setActiveStack(stack)" class="drop-shadow-lg bg-slate-100 m-1 p-3 h-64 w-64 border rounded hover:bg-slate-200 hover:scale-105">
+    <button (click)="deleteStack(stack)" class="bg-red-200 rounded-2xl p-1 text-xs absolute top-2 right-2 hover:bg-red-400">Delete</button>
+    <h1 class="text-4xl break-words text-center">{{ stack.name }}</h1>
+    <div class="bg-blue-200 rounded-2xl p-1 w-20 text-xs absolute bottom-2 right-2">
+        {{stack.tag}}
+    </div>
+  </button>
+</div>
+</div>
+<app-study-flashcards *ngIf="!activeStack" [stack]="activeStack"></app-study-flashcards>
