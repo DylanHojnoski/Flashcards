@@ -39,6 +39,18 @@ export class StudyFlashcardsComponent implements OnInit {
     }
   }
 
+  restart() {
+    let replacedCard: Card;
+    for (let i = 0; i < this.cards.length; i++) {
+      replacedCard = this.cards[i];
+      let randomInt = Math.floor(Math.random()*this.cards.length);
+      this.cards[i] = this.cards[randomInt];
+      this.cards[randomInt] = replacedCard;
+    }
+    this.index = 0;
+    this.answerActive = false;
+  }
+
   exitStudy() {
     this.exitStudyEvent.emit(false);
   }
