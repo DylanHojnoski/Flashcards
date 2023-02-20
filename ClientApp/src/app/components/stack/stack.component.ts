@@ -9,6 +9,7 @@ import { StackService } from 'src/app/services/stack.service'
 })
 export class StackComponent implements OnInit {
   @Output() selectedStackEvent = new EventEmitter<Stack>();
+  stackToEdit?: Stack;
   stacks?: Stack[];
   selectedStack: Stack = new Stack; 
   isActiveStack = false;
@@ -30,5 +31,13 @@ export class StackComponent implements OnInit {
 
   setTag(tag: String) {
     this.selectedTag = tag;
+  }
+
+  addStack(stack: Stack) {
+    this.stacks?.push(stack);
+  }
+
+  createStack() {
+    this.stackToEdit = new Stack;
   }
 }
