@@ -10,7 +10,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 })
 export class CreateStackComponent implements OnInit {
   @Input() stack?: Stack;
-  @Output() stacksUpdated = new EventEmitter<Stack[]>();
+  @Output() stacksUpdatedEvent = new EventEmitter<Stack>();
 
 
   constructor(private stackService: StackService) { }
@@ -19,7 +19,8 @@ export class CreateStackComponent implements OnInit {
   }
 
   createStack(stack: Stack) {
-    this.stackService.createStack(stack).subscribe((stacks) => this.stacksUpdated.emit(stacks));
+    this.stackService.createStack(stack).subscribe();
+    this.stacksUpdatedEvent.emit(stack);
     this.cancelStack()
   }
 

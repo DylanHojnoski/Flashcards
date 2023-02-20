@@ -28,4 +28,8 @@ export class NavbarComponent implements OnInit {
     this.selectedStack = undefined;
   }
 
+  addStack(stack: Stack) {
+    this.shownStacks?.push(stack);
+  }
+
 }

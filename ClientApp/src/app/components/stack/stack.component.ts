@@ -12,6 +12,7 @@ export class StackComponent implements OnInit {
   stacks?: Stack[];
   selectedStack: Stack = new Stack; 
   isActiveStack = false;
+  selectedTag: String = "None"
 
   constructor(private stackService: StackService) { }
 
@@ -25,5 +26,9 @@ export class StackComponent implements OnInit {
 
   selectStack(stack: Stack): void {
     this.selectedStackEvent.emit(stack)
+  }
+
+  setTag(tag: String) {
+    this.selectedTag = tag;
   }
 }

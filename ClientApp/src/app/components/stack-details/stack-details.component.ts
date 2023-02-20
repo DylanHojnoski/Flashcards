@@ -26,9 +26,9 @@ export class StackDetailsComponent implements OnInit {
       return;
     }
     card.stackId = this.stack.id;
-    this.cardService.createCard(card).subscribe((results) => (this.cards = results));
-    card.question = "";
-    card.answer = "";
+    this.cardService.createCard(card).subscribe();
+    this.cards.push(card)
+    this.card = new Card;
   }
 
   toggleStudy() {
@@ -42,9 +42,14 @@ export class StackDetailsComponent implements OnInit {
   }
 
   saveEdit(card: Card) {
+    if (card.question == "" || card.answer == "") {
+      return;
+    }
     this.cardService.upateCard(card).subscribe();
-    this.cardService.getCardsInStack(this.stack).subscribe((results) => (this.cards = results));
+    this.card.question = card.question;
+    this.card.answer = card.answer;
     this.toggleEdit();
+    this.card = new Card;
   }
 
 }

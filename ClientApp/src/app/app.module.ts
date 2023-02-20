@@ -11,6 +11,8 @@ import {NavbarComponent} from './components/navbar/navbar.component';
 import {StudyFlashcardsComponent} from './components/study-flashcards/study-flashcards.component';
 import { CreateStackComponent } from './components/create-stack/create-stack.component';
 import { StackDetailsComponent } from './components/stack-details/stack-details.component';
+import { FiltersComponent } from './components/filters/filters.component';
+import { TagSelectorComponent } from './components/tag-selector/tag-selector.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +23,8 @@ import { StackDetailsComponent } from './components/stack-details/stack-details.
     NavbarComponent,
     CreateStackComponent,
     StackDetailsComponent,
+    FiltersComponent,
+    TagSelectorComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),

@@ -1,0 +1,9 @@
+<label for="tags" class="m-1">Tag</label>
+<select [(ngModel)]="tag" (ngModelChange)="selectedTag()" name="tag" id="tag" class="m-1">
+      <option  value="None" selected="selected">None</option>
+      <option  value="History">History</option>
+      <option  value="Science">Science</option>
+      <option  value="Math">Math</option>
+      <option  value="English">English</option>
+      <option  value="Foreign Language">Foreign Language</option>
+</select>

@@ -22,7 +22,7 @@ export class StudyFlashcardsComponent implements OnInit {
   }
 
   showAnswer(): void {
-    this.answerActive = true;
+    this.answerActive = !this.answerActive;
   }
 
   nextCard(): void {

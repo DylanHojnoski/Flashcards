@@ -48,6 +48,10 @@ namespace Flashcards.Controller {
           return BadRequest("Stack not found.");
         }
 
+        var ownedCards = _context.Cards.Where<Card>((card) => (card.StackId.Equals(id)));
+        foreach (Card card in ownedCards) {
+          _context.Cards.Remove(card);
+        }
         _context.Stacks.Remove(dbStack);
         await _context.SaveChangesAsync();
         return Ok(await _context.Stacks.ToListAsync());
