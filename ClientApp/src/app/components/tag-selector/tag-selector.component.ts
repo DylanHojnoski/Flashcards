@@ -1,13 +1,5 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-
-enum tags {
-  None = "None",
-  History = "Histoy",
-  Math = "Math",
-  Science = "Science",
-  English = "English",
-  ForeignLanguage = "Foreign Language"
-}
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Tags } from 'src/app/models/tags'
 
 @Component({
   selector: 'app-tag-selector',
@@ -16,9 +8,11 @@ enum tags {
 })
 export class TagSelectorComponent implements OnInit {
   @Output() tagEvent = new EventEmitter();
-  tag :string= tags.None;
+  tags: string[] = ["None", "History", "Science", "Math", "English", "Foreign Language"] ;
+  @Input() tag: string = Tags.None;
 
-  constructor() { }
+  constructor() {}
+
 
   ngOnInit(): void {
   }

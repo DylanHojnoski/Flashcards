@@ -14,6 +14,7 @@ export class StackComponent implements OnInit {
   selectedStack: Stack = new Stack; 
   isActiveStack = false;
   selectedTag: String = "None"
+  editActive: boolean = false;
 
   constructor(private stackService: StackService) { }
 
@@ -26,7 +27,17 @@ export class StackComponent implements OnInit {
   }
 
   selectStack(stack: Stack): void {
-    this.selectedStackEvent.emit(stack)
+    if (!this.editActive) {
+      this.selectedStackEvent.emit(stack)
+    }
+  }
+
+  saveStack(stack: Stack) {
+    if (stack.name == undefined) {
+      return;
+    }
+    this.stackService.upateStack(stack).subscribe(result => this.stacks = result);
+    this.editActive = false;
   }
 
   setTag(tag: String) {
@@ -35,6 +46,10 @@ export class StackComponent implements OnInit {
 
   addStack(stack: Stack) {
     this.stacks?.push(stack);
+  }
+
+  editStacks() {
+    this.editActive = true;
   }
 
   createStack() {
