@@ -1,19 +1,19 @@
 <div class="flex flex-col justify-center">
   <div class="self-end">
-    <button (click)="exitStudy()" class="m-1 p-1 px-2 font-bold rounded-md bg-red-200 hover:bg-red-400">x</button>
+    <button (click)="exitStudy()" class="m-1 rounded-md bg-red-200 p-1 px-2 font-bold hover:bg-red-400">x</button>
   </div>
-  <div class="text-center justify-center">
+  <div class="justify-center text-center">
     {{ index + 1}}/{{cards.length}}
   </div>
   <div>
-    <div (click)="showAnswer()" class="flex flex-col justify-center drop-shadow-lg bg-slate-100 m-1 p-3 h-64 w-64 border rounded cursor-pointer hover:bg-slate-200 hover:scale-105">
+    <div (click)="showAnswer()" class="m-1 flex h-64 w-64 cursor-pointer flex-col justify-center rounded border bg-slate-100 p-3 drop-shadow-lg hover:scale-105 hover:bg-slate-200">
       <p *ngIf="!answerActive" class="text-center">{{cards[index].question}}</p>
       <p *ngIf="answerActive" class="text-center">{{cards[index].answer}}</p>
     </div>
     <div class="flex justify-center">
-      <button (click)="previousCard()" class="m-1 p-2 font-bold text-slate-50 bg-slate-400 rounded-md hover:bg-slate-600"><-</button>
-      <button (click)="nextCard()" class="m-1 p-2 font-bold text-slate-50 bg-slate-400 rounded-md hover:bg-slate-600">-></button>
+      <button (click)="previousCard()" class="m-1 rounded-md bg-slate-400 p-2 font-bold text-slate-50 hover:bg-slate-600"><-</button>
+      <button (click)="nextCard()" class="m-1 rounded-md bg-slate-400 p-2 font-bold text-slate-50 hover:bg-slate-600">-></button>
     </div>
   </div>
-  <button (click)="restart()" *ngIf="index == cards.length-1" class="block m-1 p-2 font-bold text-slate-50 bg-slate-400 rounded-md hover:bg-slate-600">Restart</button>
+  <button (click)="restart()" *ngIf="index == cards.length-1" class="m-1 block rounded-md bg-slate-400 p-2 font-bold text-slate-50 hover:bg-slate-600">Restart</button>
 </div>

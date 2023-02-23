@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Stack } from '../models/stack';
 import { Observable } from 'rxjs/internal/Observable';
@@ -13,7 +13,8 @@ export class StackService {
   constructor(private http: HttpClient) { }
 
   public getStacks() : Observable<Stack[]> {
-    return this.http.get<Stack[]>(`${environment.apiUrl}/${this.url}`)
+    const header = new HttpHeaders().set("Content-type", "application/json");
+    return this.http.get<Stack[]>(`${environment.apiUrl}/${this.url}`, { headers: header,  withCredentials: true})
   }
 
   public getStack(stack: Stack) : Observable<Stack> {

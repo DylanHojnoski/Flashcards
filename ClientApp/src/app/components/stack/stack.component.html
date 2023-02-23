@@ -1,13 +1,12 @@
 <div class="flex flex-wrap p-1 bg-slate-200 rounded-md">
-  <app-filters (tagEvent)="setTag($event)"></app-filters>
   <button (click)="createStack()" class="m-1 p-1 block font-semibold text-slate-100 justify-self-end rounded-md bg-slate-400 hover:bg-slate-600">Create Stack</button>
   <button (click)="editStacks()" class="m-1 p-1 block font-semibold text-slate-100 justify-self-end rounded-md bg-slate-400 hover:bg-slate-600">Edit</button>
+  <app-filters (tagEvent)="setTag($event)"></app-filters>
 </div>
 <app-create-stack class="justify-self-center" (stacksUpdatedEvent)="(addStack($event))" [stack]="stackToEdit"></app-create-stack>
 <div class="flex flex-wrap flex-row justify-center items-center">
   <div *ngFor="let stack of stacks">
     <button *ngIf="selectedTag == 'None' || selectedTag == stack.tag" (click)="selectStack(stack)" class="block drop-shadow-lg bg-slate-100 m-1 p-3 h-64 w-64 border rounded hover:bg-slate-200 hover:scale-105">
-      
       <div *ngIf="!editActive">
         <h1 class="text-4xl break-words text-center">{{ stack.name }}</h1>
         <div *ngIf="stack.tag != ''" class="bg-blue-200 rounded-2xl p-1 w-20 text-xs absolute bottom-2 right-2">
@@ -25,5 +24,5 @@
         <button (click)="saveStack(stack)" class="p-1 rounded-md bg-slate-400 text-slate-50">Save</button>
       </div>
     </button>
-</div>
+  </div>
 </div>

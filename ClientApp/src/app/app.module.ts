@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 
@@ -13,6 +13,7 @@ import { CreateStackComponent } from './components/create-stack/create-stack.com
 import { StackDetailsComponent } from './components/stack-details/stack-details.component';
 import { FiltersComponent } from './components/filters/filters.component';
 import { TagSelectorComponent } from './components/tag-selector/tag-selector.component';
+import { LoginComponent } from './components/login/login.component';
 
 @NgModule({
   declarations: [
@@ -25,11 +26,13 @@ import { TagSelectorComponent } from './components/tag-selector/tag-selector.com
     StackDetailsComponent,
     FiltersComponent,
     TagSelectorComponent,
+    LoginComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,
     FormsModule,
+    ReactiveFormsModule,
     RouterModule.forRoot([
     ])
   ],

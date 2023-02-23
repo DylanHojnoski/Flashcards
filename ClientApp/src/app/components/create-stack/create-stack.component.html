@@ -1,7 +1,7 @@
-<div *ngIf="stack" class="flex justify-center justify-self-center w-full">
-  <div class="flex flex-wrap justify-self-center p-1 m-1 bg-slate-200 rounded-md w-min"> 
-    <input [(ngModel)]="stack.userId" type="number" placeholder="userId" class="m-1 p-1 rounded-md bg-slate-50" > 
-    <input [(ngModel)]="stack.name" type="text" placeholder="Name" class="m-1 p-1 rounded-md bg-slate-50"> 
+<div *ngIf="stack" class="flex w-full justify-center justify-self-center">
+  <div class="m-1 flex w-min flex-wrap justify-self-center rounded-md bg-slate-200 p-1"> 
+    <input [(ngModel)]="stack.userId" type="number" placeholder="userId" class="m-1 rounded-md bg-slate-50 p-1" > 
+    <input [(ngModel)]="stack.name" type="text" placeholder="Name" class="m-1 rounded-md bg-slate-50 p-1"> 
     <div>
       <app-tag-selector  (tagEvent)="stack.tag = $event"></app-tag-selector>
     </div>
@@ -10,8 +10,8 @@
       <label for="Public" class="m-1">Public</label>
     </div>
     <div>
-      <button (click)="createStack(stack)" class="m-1 p-1 bg-slate-400 text-slate-50 rounded-md hover:bg-slate-600">Create</button>
-      <button (click)="cancelStack()" class="m-1 bg-red-200 rounded-md p-1 hover:bg-red-400">Cancel</button>
+      <button (click)="createStack(stack)" class="m-1 rounded-md bg-slate-400 p-1 text-slate-50 hover:bg-slate-600">Create</button>
+      <button (click)="cancelStack()" class="m-1 rounded-md bg-red-200 p-1 hover:bg-red-400">Cancel</button>
     </div>
   </div>
 </div>

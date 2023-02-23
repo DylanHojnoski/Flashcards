@@ -1,6 +1,7 @@
 using Flashcards.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Flashcards.Controller {
   [Route("api/[controller]")]
@@ -14,6 +15,8 @@ namespace Flashcards.Controller {
         this._context = context;
       }
 
+
+      [Authorize(Policy = "User")]
       [HttpGet]
       public async Task<ActionResult<List<Stack>>> GetStacks() {
         return Ok(await _context.Stacks.ToListAsync());

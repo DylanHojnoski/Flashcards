@@ -8,7 +8,7 @@ import { Tags } from 'src/app/models/tags'
 })
 export class TagSelectorComponent implements OnInit {
   @Output() tagEvent = new EventEmitter();
-  tags: string[] = ["None", "History", "Science", "Math", "English", "Foreign Language"] ;
+  tags: string[] = ["None", "History", "Science", "Math", "English", "Social Studies", "Computer Science", "Foreign Language"] ;
   @Input() tag: string = Tags.None;
 
   constructor() {}

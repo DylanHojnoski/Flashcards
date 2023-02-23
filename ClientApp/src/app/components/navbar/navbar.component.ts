@@ -10,6 +10,7 @@ export class NavbarComponent implements OnInit {
   stackToEdit?: Stack;
   shownStacks?: Stack[]
   selectedStack?: Stack;
+  signIn = false;
 
   constructor() { }
 
@@ -26,6 +27,10 @@ export class NavbarComponent implements OnInit {
 
   unselectStack() {
     this.selectedStack = undefined;
+  }
+
+  toggleSignIn() {
+    this.signIn = !this.signIn;
   }
 
   addStack(stack: Stack) {
