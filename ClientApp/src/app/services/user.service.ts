@@ -19,4 +19,10 @@ export class UserService {
     const header = new HttpHeaders().set("Content-type", "application/json");
     return this.httpClient.post(environment.apiUrl + "/" + this.url + "/LoginWithGoogle" , JSON.stringify(credentials), { headers: header, withCredentials: true });
   }
+
+  GetCurrentUser(): Observable<any> {
+    const header = new HttpHeaders().set("Content-type", "application/json");
+    return this.httpClient.get(environment.apiUrl + "/" + this.url + "/GetCurrentUser" , { headers: header, withCredentials: true });
+  }
+
 }

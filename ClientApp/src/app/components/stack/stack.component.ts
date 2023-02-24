@@ -23,13 +23,10 @@ export class StackComponent implements OnInit {
 
   ngOnInit(): void {
     // User stacks
-    console.log(this.activePage);
     if (this.activePage == 0) {
-      console.log("User")
       this.stackService.getUserStacks().subscribe((result: Stack[]) => (this.stacks = result));
 
     } else { // Public stacks
-      console.log("Public")
       this.stackService.getPublicStacks().subscribe((result: Stack[]) => (this.stacks = result));
     }
   }

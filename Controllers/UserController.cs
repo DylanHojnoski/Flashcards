@@ -8,6 +8,7 @@ using System.Text;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using System.Security.Claims;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Flashcards.Controller {
   [Route("api/[controller]")]
@@ -31,6 +32,16 @@ namespace Flashcards.Controller {
       [HttpGet("GetUserByName/{name}")]
       public async Task<ActionResult<User>> GetUserByName(string name) {
         return Ok(await _context.Users.FirstAsync<User>(user => user.Name == name));
+      }
+
+      [Authorize(Policy = "User")]
+      [HttpGet("GetCurrentUser")]
+      public ActionResult<int> GetCurrentUser() {
+        var id = HttpContext.User.Identity.Name;
+        if (id != null) {
+          return Ok(id);
+        }
+        return BadRequest("Not Signed In") ;
       }
 
       [HttpPost]
