@@ -125,13 +125,26 @@ namespace Flashcards.Controller {
             HttpOnly = true,
             Secure = true,
             IsEssential = true,
-            Domain = "localhost",
             SameSite = SameSiteMode.None,
             });
 
         return new {token = encrypterToken, name = user.Name};
       }
 
+      [Authorize(Policy = "User")]
+      [HttpPost("Logout")]
+      public void Logout() {
+        HttpContext.Response.Cookies.Delete("token");
+        HttpContext.Response.Cookies.Append("token", "",
+            new CookieOptions
+            {
+            Expires = DateTime.Now.AddDays(-10),
+            HttpOnly = true,
+            Secure = true,
+            IsEssential = true,
+            SameSite = SameSiteMode.None,
+            });
+      }
     }
 
 }

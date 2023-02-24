@@ -12,7 +12,8 @@ export class UserService {
   constructor(private httpClient: HttpClient) { }
 
   signOutExternal = () => {
-    localStorage.removeItem("token");
+    const header = new HttpHeaders().set("Content-type", "application/json");
+    return this.httpClient.post(environment.apiUrl + "/" + this.url + "/Logout" , { headers: header, withCredentials: true });
   }
 
   LoginWithGoogle(credentials: string): Observable<any> {

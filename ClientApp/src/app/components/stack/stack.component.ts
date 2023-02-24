@@ -18,6 +18,7 @@ export class StackComponent implements OnInit {
   isActiveStack = false;
   selectedTag: String = "None"
   editActive: boolean = false;
+  search = "";
 
   constructor(private stackService: StackService) { }
 
@@ -51,6 +52,11 @@ export class StackComponent implements OnInit {
 
   setTag(tag: String) {
     this.selectedTag = tag;
+  }
+
+  setSearch(search: string) {
+    console.log(search);
+    this.search = search;
   }
 
   addStack(stack: Stack) {

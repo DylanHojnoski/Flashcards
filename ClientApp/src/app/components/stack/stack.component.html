@@ -1,27 +1,27 @@
-<div class="flex flex-wrap p-1 bg-slate-200 rounded-md">
-  <button *ngIf="activePage == pageEnum.Home" (click)="createStack()" class="m-1 p-1 block font-semibold text-slate-100 justify-self-end rounded-md bg-slate-400 hover:bg-slate-600">Create Stack</button>
-  <button *ngIf="activePage == pageEnum.Home" (click)="editStacks()" class="m-1 p-1 block font-semibold text-slate-100 justify-self-end rounded-md bg-slate-400 hover:bg-slate-600">Edit</button>
-  <app-filters (tagEvent)="setTag($event)"></app-filters>
+<div class="flex flex-wrap rounded-md bg-slate-200 p-1">
+  <button *ngIf="activePage == pageEnum.Home" (click)="createStack()" class="m-1 block justify-self-end rounded-md bg-slate-400 p-1 font-semibold text-slate-100 hover:bg-slate-600">Create Stack</button>
+  <button *ngIf="activePage == pageEnum.Home" (click)="editStacks()" class="m-1 block justify-self-end rounded-md bg-slate-400 p-1 font-semibold text-slate-100 hover:bg-slate-600">Edit</button>
+  <app-filters (searchEvent)="setSearch($event)" (tagEvent)="setTag($event)"></app-filters>
 </div>
 <app-create-stack class="justify-self-center" (stacksUpdatedEvent)="(addStack($event))" [stack]="stackToEdit"></app-create-stack>
-<div class="flex flex-wrap flex-row justify-center items-center">
+<div class="flex flex-row flex-wrap items-center justify-center">
   <div *ngFor="let stack of stacks">
-    <button *ngIf="selectedTag == 'None' || selectedTag == stack.tag" (click)="selectStack(stack)" class="block drop-shadow-lg bg-slate-100 m-1 p-3 h-64 w-64 border rounded hover:bg-slate-200 hover:scale-105">
+    <button *ngIf="(selectedTag == 'None' || selectedTag == stack.tag) && (search == '' || stack.name.toLowerCase().includes(search.toLowerCase()))"  (click)="selectStack(stack)" class="m-1 block h-64 w-64 rounded border bg-slate-100 p-3 drop-shadow-lg hover:scale-105 hover:bg-slate-200">
       <div *ngIf="!editActive">
-        <h1 class="text-4xl break-words text-center">{{ stack.name }}</h1>
-        <div *ngIf="stack.tag != ''" class="bg-blue-200 rounded-2xl p-1 w-20 text-xs absolute bottom-2 right-2">
+        <h1 class="break-words text-center text-4xl">{{ stack.name }}</h1>
+        <div *ngIf="stack.tag != ''" class="absolute bottom-2 right-2 w-20 rounded-2xl bg-blue-200 p-1 text-xs">
           {{stack.tag}}
         </div>
       </div>
       <div *ngIf="editActive">
-        <button *ngIf="editActive" (click)="deleteStack(stack)" class="font-bold bg-red-200 rounded-2xl px-1 text-xs leading-tight absolute top-2 right-2 hover:bg-red-400">x</button>
-        <input [(ngModel)]="stack.name" type="text" placeholder="Name" class="m-1 p-1 rounded-md bg-slate-50"> 
+        <button *ngIf="editActive" (click)="deleteStack(stack)" class="absolute top-2 right-2 rounded-2xl bg-red-200 px-1 text-xs font-bold leading-tight hover:bg-red-400">x</button>
+        <input [(ngModel)]="stack.name" type="text" placeholder="Name" class="m-1 rounded-md bg-slate-50 p-1"> 
         <app-tag-selector  (tagEvent)="stack.tag = $event" [tag]="stack.tag"></app-tag-selector>
         <div>
           <input [(ngModel)]="stack.public" type="checkbox" name="Public" value="Public" class="m-1">
           <label for="Public" class="m-1">Public</label>
         </div>
-        <button (click)="saveStack(stack)" class="p-1 rounded-md bg-slate-400 text-slate-50">Save</button>
+        <button (click)="saveStack(stack)" class="rounded-md bg-slate-400 p-1 text-slate-50">Save</button>
       </div>
     </button>
   </div>

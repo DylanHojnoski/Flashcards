@@ -1,3 +1,6 @@
-<div class="rounded-md border-2 border-slate-50 p-1">
+<div class="flex flex-wrap flex-row items-center rounded-md p-1">
   <app-tag-selector (tagEvent)="filter($event)"></app-tag-selector>
+  <div>
+    <input  [(ngModel)]="searchInput" (input)="search()" type="text" placeholder="Search" class="m-1 rounded-md p-1">
+  </div>
 </div>
