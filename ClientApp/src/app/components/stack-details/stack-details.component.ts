@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Card } from 'src/app/models/card'
 import { Stack } from 'src/app/models/stack';
 import { CardService } from 'src/app/services/card.service'
+import { Pages } from 'src/app/models/pages';
 
 @Component({
   selector: 'app-stack-details',
@@ -10,6 +11,8 @@ import { CardService } from 'src/app/services/card.service'
 })
 export class StackDetailsComponent implements OnInit {
   @Input() stack: Stack = new Stack;
+  @Input() activePage?: Pages;
+  pageEnum = Pages;
   cards: Card[] = new Array;
   card: Card = new Card;
   study = false;

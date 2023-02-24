@@ -1,6 +1,7 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Stack } from 'src/app/models/stack';
 import { StackService } from 'src/app/services/stack.service'
+import { Pages } from 'src/app/models/pages';
 
 @Component({
   selector: 'app-stack',
@@ -9,6 +10,8 @@ import { StackService } from 'src/app/services/stack.service'
 })
 export class StackComponent implements OnInit {
   @Output() selectedStackEvent = new EventEmitter<Stack>();
+  @Input() activePage?: Pages;
+  pageEnum = Pages;
   stackToEdit?: Stack;
   stacks?: Stack[];
   selectedStack: Stack = new Stack; 
@@ -19,7 +22,16 @@ export class StackComponent implements OnInit {
   constructor(private stackService: StackService) { }
 
   ngOnInit(): void {
-    this.stackService.getStacks().subscribe((result : Stack[]) => (this.stacks = result));
+    // User stacks
+    console.log(this.activePage);
+    if (this.activePage == 0) {
+      console.log("User")
+      this.stackService.getUserStacks().subscribe((result: Stack[]) => (this.stacks = result));
+
+    } else { // Public stacks
+      console.log("Public")
+      this.stackService.getPublicStacks().subscribe((result: Stack[]) => (this.stacks = result));
+    }
   }
 
   deleteStack(stack: Stack): void {

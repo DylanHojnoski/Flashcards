@@ -16,17 +16,38 @@ namespace Flashcards.Controller {
       }
 
 
-      [Authorize(Policy = "User")]
       [HttpGet]
       public async Task<ActionResult<List<Stack>>> GetStacks() {
         return Ok(await _context.Stacks.ToListAsync());
       }
 
+      [HttpGet("PublicStacks")]
+      public async Task<ActionResult<List<Stack>>> GetPublicStacks() {
+        return Ok(await _context.Stacks.Where<Stack>((stack) => (stack.Public == true)).ToListAsync());
+      }
+
+      [Authorize(Policy = "User")]
+      [HttpGet("UserStacks")]
+      public async Task<ActionResult<List<Stack>>> GetUserStacks() {
+        var id = HttpContext.User.Identity.Name;
+        if (id != null) {
+
+        return Ok(await _context.Stacks.Where<Stack>((stack) => (stack.UserId == int.Parse(id))).ToListAsync());
+        }
+        return BadRequest("Not Signed In") ;
+      }
+
+      [Authorize(Policy = "User")]
       [HttpPost]
       public async Task<ActionResult<List<Stack>>> CreateStack(Stack stack) {
-        _context.Stacks.Add(stack);
-        await _context.SaveChangesAsync();
-        return Ok(await _context.Stacks.ToListAsync());
+        var id = HttpContext.User.Identity.Name;
+        if (id != null) {
+          stack.UserId = int.Parse(id);
+          _context.Stacks.Add(stack);
+          await _context.SaveChangesAsync();
+          return Ok(await _context.Stacks.ToListAsync());
+        }
+        return BadRequest("Not Signed In") ;
       }
 
       [HttpPut]

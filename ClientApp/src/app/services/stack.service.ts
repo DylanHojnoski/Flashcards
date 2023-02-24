@@ -17,6 +17,16 @@ export class StackService {
     return this.http.get<Stack[]>(`${environment.apiUrl}/${this.url}`, { headers: header,  withCredentials: true})
   }
 
+  public getPublicStacks() : Observable<Stack[]> {
+    const header = new HttpHeaders().set("Content-type", "application/json");
+    return this.http.get<Stack[]>(`${environment.apiUrl}/${this.url}` + "/PublicStacks", { headers: header,  withCredentials: true})
+  }
+
+  public getUserStacks() : Observable<Stack[]> {
+    const header = new HttpHeaders().set("Content-type", "application/json");
+    return this.http.get<Stack[]>(`${environment.apiUrl}/${this.url}` + "/UserStacks", { headers: header,  withCredentials: true})
+  }
+
   public getStack(stack: Stack) : Observable<Stack> {
     return this.http.get<Stack>(`${environment.apiUrl}/${this.url}/${stack.id}`)
   }
@@ -26,7 +36,8 @@ export class StackService {
   }
 
   public createStack(stack: Stack) : Observable<Stack[]> {
-    return this.http.post<Stack[]>(`${environment.apiUrl}/${this.url}`, stack)
+    const header = new HttpHeaders().set("Content-type", "application/json");
+    return this.http.post<Stack[]>(`${environment.apiUrl}/${this.url}`, stack, { headers: header,  withCredentials: true})
   }
 
   public deleteStack(stack: Stack) : Observable<Stack[]> {

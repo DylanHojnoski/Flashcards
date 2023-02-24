@@ -1,6 +1,5 @@
 <div *ngIf="stack" class="flex w-full justify-center justify-self-center">
   <div class="m-1 flex w-min flex-wrap justify-self-center rounded-md bg-slate-200 p-1"> 
-    <input [(ngModel)]="stack.userId" type="number" placeholder="userId" class="m-1 rounded-md bg-slate-50 p-1" > 
     <input [(ngModel)]="stack.name" type="text" placeholder="Name" class="m-1 rounded-md bg-slate-50 p-1"> 
     <div>
       <app-tag-selector  (tagEvent)="stack.tag = $event"></app-tag-selector>

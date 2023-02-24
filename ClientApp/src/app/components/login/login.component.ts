@@ -38,6 +38,7 @@ export class LoginComponent implements OnInit {
         button.onclick = () => {
         // @ts-ignore
 google.accounts.id.disableAutoSelect();
+    this.service.signOutExternal();
         console.log("disableAutoSelect")
         // @ts-ignore
     }
@@ -60,7 +61,8 @@ google.accounts.id.disableAutoSelect();
   }
 
   public logout() {
-    this.service.signOutExternal;
+    console.log("logout");
+    this.service.signOutExternal();
   }
 
 }
