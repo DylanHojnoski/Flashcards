@@ -1,4 +1,4 @@
-import { Component, NgZone, OnInit } from '@angular/core';
+import { Component, EventEmitter, NgZone, OnInit, Output } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CredentialResponse, PromptMomentNotification } from 'google-one-tap';
@@ -13,6 +13,7 @@ import { environment } from 'src/environments/environment';
 export class LoginComponent implements OnInit {
 
   private clientId = environment.clientId;
+  @Output() signedInEvent = new EventEmitter<boolean>();
   constructor(private service: UserService,
     private _ngZone: NgZone,
     private router: Router,
@@ -52,6 +53,7 @@ google.accounts.id.disableAutoSelect();
               //          localStorage.setItem("token", x.token);
               this._ngZone.run(() => {
                   //this.router.navigate(['/logout']);
+                  this.signedInEvent.emit(true);
               })},
               (error:any) => {
               }

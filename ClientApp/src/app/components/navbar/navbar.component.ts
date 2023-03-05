@@ -13,6 +13,7 @@ export class NavbarComponent implements OnInit {
   stackToEdit?: Stack;
   shownStacks?: Stack[]
   selectedStack: Stack = new Stack  ;
+  signedIn = false;
   signIn = false;
   pageEnum = Pages;
   activePage = Pages.Explore;
@@ -48,6 +49,10 @@ export class NavbarComponent implements OnInit {
 
   unselectStack() {
     //this.selectedStack = undefined;
+  }
+
+  toggleSignedIn() {
+      this.signedIn = !this.signedIn;
   }
 
   toggleSignIn() {

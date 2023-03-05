@@ -1,15 +1,15 @@
 <div class="mb-4 flex w-full flex-row content-center items-center justify-center bg-slate-300 p-1">
   <h1 class="hidden align-text-bottom text-2xl md:block">Flashcards</h1>
-  <button (click)="unselectStack()" (click)="selectHome()" class="m-1 rounded-md bg-slate-200 p-1 hover:bg-slate-400">Home</button>
+  <button *ngIf="signedIn" (click)="unselectStack()" (click)="selectHome()" class="m-1 rounded-md bg-slate-200 p-1 hover:bg-slate-400">Home</button>
   <button (click)="selectExplore()" class="m-1 rounded-md bg-slate-200 p-1 hover:bg-slate-400">Explore</button>
-  <button (click)="selectAccount()" class="m-1 rounded-md bg-slate-200 p-1 hover:bg-slate-400">Account</button>
-  <button (click)="toggleSignIn()" class="m-1 rounded-md bg-slate-600 p-1 font-semibold text-slate-100 hover:bg-slate-800">Sign In</button>
+  <button *ngIf="signedIn" (click)="selectAccount()" class="m-1 rounded-md bg-slate-200 p-1 hover:bg-slate-400">Account</button>
+  <button *ngIf="!signedIn" (click)="toggleSignIn()" class="m-1 rounded-md bg-slate-600 p-1 font-semibold text-slate-100 hover:bg-slate-800">Sign In</button>
 </div>
 <div class="flex flex-col justify-center px-10">
-  <app-login  [ngClass]="{'hidden': !signIn}"></app-login>
+  <app-login  [ngClass]="{'hidden': !signIn}" (signedInEvent)="toggleSignedIn()"></app-login>
   <app-create-stack class="justify-self-center" (stacksUpdatedEvent)="($event)" [stack]="stackToEdit"></app-create-stack>
   <app-stack *ngIf="activePage == pageEnum.Explore" [activePage]="activePage" (selectedStackEvent)="selectStack($event)"></app-stack>
   <app-stack *ngIf="activePage == pageEnum.Home" [activePage]="activePage" (selectedStackEvent)="selectStack($event)"></app-stack>
   <app-stack-details *ngIf="activePage == pageEnum.StackDetails" [activePage]="activePage" [stack]="selectedStack"></app-stack-details>
-  <app-account *ngIf="activePage == pageEnum.Account"></app-account>
+  <app-account *ngIf="activePage == pageEnum.Account" (logoutEvent)="toggleSignedIn()"></app-account>
 </div>

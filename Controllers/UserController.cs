@@ -133,10 +133,10 @@ namespace Flashcards.Controller {
       }
 
       [Authorize(Policy = "User")]
-      [HttpPost("Logout")]
+      [HttpGet("Logout")]
       public void Logout() {
         HttpContext.Response.Cookies.Delete("token");
-        HttpContext.Response.Cookies.Append("token", "fjdk",
+        HttpContext.Response.Cookies.Append("token", "",
             new CookieOptions
             {
             Expires = DateTime.Now.AddDays(-10),

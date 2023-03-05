@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { User } from 'src/app/models/user';
 import { UserService } from 'src/app/services/user.service';
 
@@ -8,6 +8,7 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./account.component.css']
 })
 export class AccountComponent implements OnInit {
+    @Output() logoutEvent = new EventEmitter<boolean>();
   currentUser: User = new User;
   editUser: User = new User;
   existingUser: User[] = []; 
@@ -25,6 +26,11 @@ export class AccountComponent implements OnInit {
     this.editActive = !this.editActive;
   }
 
+  logout() {
+      this.userService.Logout().subscribe();
+      this.logoutEvent.emit();
+  }
+
   getUserName(user: User): Promise<User> {
       return new Promise<User>(resolve => this.userService.GetUserByName(user).subscribe(result => {resolve(result)}));
   }
@@ -39,19 +45,14 @@ export class AccountComponent implements OnInit {
       if (existingUser != null){
           userFound = true;
       }
-      console.log("Exisitng user")
-      console.log(existingUser)
-      console.log(userFound)
       if (userFound && existingUser.id != this.currentUser.id) {
           this.nameTaken = true;
-          console.log("name taken")
           this.editUser = new User;
           return;
       }
       this.editUser.id = this.currentUser.id;
       this.editUser.email = this.currentUser.email;
       this.userService.UpdateUser(this.editUser).subscribe();
-      console.log("updated");
       this.currentUser.name = this.editUser.name;
       this.editUser = new User;
       this.nameTaken = false;

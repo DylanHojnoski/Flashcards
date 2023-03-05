@@ -36,4 +36,9 @@ export class UserService {
     const header = new HttpHeaders().set("Content-type", "application/json");
     return this.httpClient.get(environment.apiUrl + "/" + this.url + "/GetUserByName/" + user.name,  { headers: header, withCredentials: true });
   }
+
+ Logout(): Observable<any> {
+    const header = new HttpHeaders().set("Content-type", "application/json");
+    return this.httpClient.get(environment.apiUrl + "/" + this.url + "/Logout",  { headers: header, withCredentials: true });
+  }
 }

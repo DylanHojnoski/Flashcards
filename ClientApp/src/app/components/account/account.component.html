@@ -8,7 +8,7 @@
         </div>
         <div class="flex flex-row flex-wrap">
             <button *ngIf="!editActive" (click)="toggleEdit()" class="m-1 block justify-self-end rounded-md bg-slate-400 p-1 font-semibold text-slate-100 hover:bg-slate-600">Edit</button>
-            <button class="m-1 rounded-md bg-red-200 p-1 leading-tight hover:bg-red-400">Logout</button> 
+            <button (click)="logout()" class="m-1 rounded-md bg-red-200 p-1 leading-tight hover:bg-red-400">Logout</button> 
         </div>
     </div> 
     <div *ngIf="editActive" class="bg-slate-200 rounded-md m-1 p-1 w-min">
