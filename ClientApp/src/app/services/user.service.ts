@@ -1,5 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { User } from 'src/app/models/user';
 import { Observable } from 'rxjs/internal/Observable';
 import { environment } from 'src/environments/environment';
 
@@ -26,4 +27,13 @@ export class UserService {
     return this.httpClient.get(environment.apiUrl + "/" + this.url + "/GetCurrentUser" , { headers: header, withCredentials: true });
   }
 
+  UpdateUser(user: User): Observable<any> {
+    const header = new HttpHeaders().set("Content-type", "application/json");
+    return this.httpClient.put(environment.apiUrl + "/" + this.url , user,  { headers: header, withCredentials: true });
+  }
+
+ GetUserByName(user: User): Observable<any> {
+    const header = new HttpHeaders().set("Content-type", "application/json");
+    return this.httpClient.get(environment.apiUrl + "/" + this.url + "/GetUserByName/" + user.name,  { headers: header, withCredentials: true });
+  }
 }

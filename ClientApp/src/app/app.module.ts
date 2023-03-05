@@ -14,6 +14,7 @@ import { StackDetailsComponent } from './components/stack-details/stack-details.
 import { FiltersComponent } from './components/filters/filters.component';
 import { TagSelectorComponent } from './components/tag-selector/tag-selector.component';
 import { LoginComponent } from './components/login/login.component';
+import { AccountComponent } from './components/account/account.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { LoginComponent } from './components/login/login.component';
     FiltersComponent,
     TagSelectorComponent,
     LoginComponent,
+    AccountComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),

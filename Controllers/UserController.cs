@@ -31,15 +31,15 @@ namespace Flashcards.Controller {
 
       [HttpGet("GetUserByName/{name}")]
       public async Task<ActionResult<User>> GetUserByName(string name) {
-        return Ok(await _context.Users.FirstAsync<User>(user => user.Name == name));
+        return Ok(await _context.Users.FirstOrDefaultAsync<User>(user => user.Name == name));
       }
 
       [Authorize(Policy = "User")]
       [HttpGet("GetCurrentUser")]
-      public ActionResult<int> GetCurrentUser() {
+      public async Task<ActionResult<List<User>>> GetCurrentUser() {
         var id = HttpContext.User.Identity.Name;
         if (id != null) {
-          return Ok(id);
+          return Ok(await _context.Users.FirstOrDefaultAsync<User>(user => user.Id == int.Parse(id)));
         }
         return BadRequest("Not Signed In") ;
       }
@@ -54,6 +54,7 @@ namespace Flashcards.Controller {
         return Ok(await _context.Users.ToListAsync());
       }
 
+      [Authorize(Policy = "User")]
       [HttpPut]
       public async Task<ActionResult<List<User>>> UpdateUser(User user) {
         var dbUser = await _context.Users.FindAsync(user.Id);
@@ -87,7 +88,7 @@ namespace Flashcards.Controller {
           Audience = new List<string> {this._applicationSettings.GoogleClientId }
         };
         var payload = await GoogleJsonWebSignature.ValidateAsync(credential, setting);
-        var user = await _context.Users.Where<User>(user => user.Name == payload.Name).FirstOrDefaultAsync();
+        var user = await _context.Users.Where<User>(user => user.Email == payload.Email).FirstOrDefaultAsync();
         if (user != null) {
           generateToken(user);
 
@@ -135,7 +136,7 @@ namespace Flashcards.Controller {
       [HttpPost("Logout")]
       public void Logout() {
         HttpContext.Response.Cookies.Delete("token");
-        HttpContext.Response.Cookies.Append("token", "",
+        HttpContext.Response.Cookies.Append("token", "fjdk",
             new CookieOptions
             {
             Expires = DateTime.Now.AddDays(-10),

@@ -43,26 +43,24 @@ google.accounts.id.disableAutoSelect();
         // @ts-ignore
     }
         // @ts-ignore
-        google.accounts.id.prompt((notification: PromptMomentNotification) => {});
+    google.accounts.id.prompt((notification: PromptMomentNotification) => {});
       }; 
   }
   async handleCredentialResponse(response: CredentialResponse) {
       await this.service.LoginWithGoogle(response.credential).subscribe(
-        (x:any) => {
-//          localStorage.setItem("token", x.token);
-          this._ngZone.run(() => {
-            //this.router.navigate(['/logout']);
-          })},
-        (error:any) => {
-            console.log(error);
-            console.log("Error");
-          }
-        );  
+          (x:any) => {
+              //          localStorage.setItem("token", x.token);
+              this._ngZone.run(() => {
+                  //this.router.navigate(['/logout']);
+              })},
+              (error:any) => {
+              }
+      );  
   }
 
   public logout() {
-    console.log("logout");
-    this.service.signOutExternal();
+      console.log("logout");
+      this.service.signOutExternal();
   }
 
 }

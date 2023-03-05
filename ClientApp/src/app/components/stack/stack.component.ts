@@ -55,7 +55,6 @@ export class StackComponent implements OnInit {
   }
 
   setSearch(search: string) {
-    console.log(search);
     this.search = search;
   }
 

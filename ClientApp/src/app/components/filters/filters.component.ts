@@ -24,7 +24,6 @@ export class FiltersComponent implements OnInit {
   }
 
   search() {
-    console.log("emit search");
     this.searchEvent.emit(this.searchInput);
   }
 

@@ -32,6 +32,11 @@ export class NavbarComponent implements OnInit {
     this.shownStacks = undefined;
   }
 
+  selectAccount() {
+    this.activePage = this.pageEnum.Account;
+    this.shownStacks = undefined;
+  }
+
   createStack() {
     this.stackToEdit = new Stack;
   }

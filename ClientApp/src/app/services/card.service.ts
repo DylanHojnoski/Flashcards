@@ -26,14 +26,14 @@ export class CardService {
   }
   
   public upateCard(card: Card) : Observable<Card[]> {
-    return this.http.put<Card[]>(`${environment.apiUrl}/${this.url}`, card)
+    return this.http.put<Card[]>(`${environment.apiUrl}/${this.url}`, card, { withCredentials: true})
   }
 
   public createCard(card: Card) : Observable<Card[]> {
-    return this.http.post<Card[]>(`${environment.apiUrl}/${this.url}`, card)
+    return this.http.post<Card[]>(`${environment.apiUrl}/${this.url}`, card, { withCredentials: true})
   }
 
   public deleteCard(card: Card) : Observable<Card[]> {
-    return this.http.delete<Card[]>(`${environment.apiUrl}/${this.url}/${card.id}`)
+    return this.http.delete<Card[]>(`${environment.apiUrl}/${this.url}/${card.id}`, { withCredentials: true})
   }
 }
