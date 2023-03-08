@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Stack } from 'src/app/models/stack';
 import { Pages } from 'src/app/models/pages';
+import { UserService } from 'src/app/services/user.service';
+import { User } from 'src/app/models/user';
 
 
 @Component({
@@ -18,9 +20,14 @@ export class NavbarComponent implements OnInit {
     pageEnum = Pages;
     activePage = Pages.Explore;
 
-    constructor() { }
+    constructor(private userService: UserService) { }
 
     ngOnInit(): void {
+        this.userService.GetCurrentUser().subscribe(async result => {
+            if (await result != null) {
+                this.toggleSignedIn();
+            }
+        })
     }
 
     selectHome() {
