@@ -3,7 +3,7 @@
   <button *ngIf="activePage == pageEnum.Home" (click)="editStacks()" class="m-1 block justify-self-end rounded-md bg-slate-400 p-1 font-semibold text-slate-100 hover:bg-slate-600">Edit</button>
   <app-filters (searchEvent)="setSearch($event)" (tagEvent)="setTag($event)"></app-filters>
 </div>
-<app-create-stack class="justify-self-center" (stacksUpdatedEvent)="(addStack($event))" [stack]="stackToEdit"></app-create-stack>
+<app-create-stack class="justify-self-center" (stacksUpdatedEvent)="(showStacks($event))" [stack]="stackToEdit"></app-create-stack>
 <div class="flex flex-row flex-wrap items-center justify-center">
   <div *ngFor="let stack of stacks">
     <button *ngIf="(selectedTag == 'None' || selectedTag == stack.tag) && (search == '' || stack.name.toLowerCase().includes(search.toLowerCase()))"  (click)="selectStack(stack)" class="m-1 block h-64 w-64 rounded border bg-slate-100 p-3 drop-shadow-lg hover:scale-105 hover:bg-slate-200">

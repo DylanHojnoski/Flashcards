@@ -51,8 +51,8 @@ namespace Flashcards.Controller {
       
       [Authorize(Policy = "User")]
       [HttpDelete("{id}")]
-      public async Task<ActionResult<List<Card>>> DeleteCard(Card card) {
-        var dbCard = await _context.Cards.FindAsync(card.Id);
+      public async Task<ActionResult<List<Card>>> DeleteCard(int id) {
+        var dbCard = await _context.Cards.FindAsync(id);
         if (dbCard == null) {
           return BadRequest("Card not found.");
         }

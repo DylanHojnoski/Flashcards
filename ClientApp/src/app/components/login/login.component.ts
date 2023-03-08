@@ -40,7 +40,6 @@ export class LoginComponent implements OnInit {
         // @ts-ignore
 google.accounts.id.disableAutoSelect();
     this.service.signOutExternal();
-        console.log("disableAutoSelect")
         // @ts-ignore
     }
         // @ts-ignore
@@ -61,7 +60,6 @@ google.accounts.id.disableAutoSelect();
   }
 
   public logout() {
-      console.log("logout");
       this.service.signOutExternal();
   }
 

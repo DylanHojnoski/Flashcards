@@ -33,7 +33,7 @@ export class StackComponent implements OnInit {
   }
 
   deleteStack(stack: Stack): void {
-    this.stackService.deleteStack(stack).subscribe((result: Stack[]) => (this.stacks = result));
+    this.stackService.deleteStack(stack).subscribe((result: Stack[]) => (this.stacks = result.filter(returnedStacks => returnedStacks.userId == stack.userId)));
   }
 
   selectStack(stack: Stack): void {
@@ -52,6 +52,10 @@ export class StackComponent implements OnInit {
 
   setTag(tag: String) {
     this.selectedTag = tag;
+  }
+
+  showStacks(stacks: Stack[]) {
+   this.stacks = stacks;
   }
 
   setSearch(search: string) {

@@ -7,57 +7,60 @@ import { Pages } from 'src/app/models/pages';
 import { User } from 'src/app/models/user';
 
 @Component({
-  selector: 'app-stack-details',
-  templateUrl: './stack-details.component.html',
-  styleUrls: ['./stack-details.component.css']
+    selector: 'app-stack-details',
+    templateUrl: './stack-details.component.html',
+    styleUrls: ['./stack-details.component.css']
 })
 export class StackDetailsComponent implements OnInit {
-  @Input() stack: Stack = new Stack;
-  @Input() activePage?: Pages;
-  pageEnum = Pages;
-  cards: Card[] = new Array;
-  card: Card = new Card;
-  study = false;
-  edit = false;
-  user: User = new User; 
+    @Input() stack: Stack = new Stack;
+    @Input() activePage?: Pages;
+    pageEnum = Pages;
+    cards: Card[] = new Array;
+    card: Card = new Card;
+    study = false;
+    edit = false;
+    user: User = new User; 
 
-  constructor(private cardService: CardService, private userService: UserService) { }
+    constructor(private cardService: CardService, private userService: UserService) { }
 
-  ngOnInit(): void {
-    this.cardService.getCardsInStack(this.stack).subscribe((results) => (this.cards = results));
-    this.userService.GetCurrentUser().subscribe((result) => (this.user = result)); 
-  }
-
-
-  createCard(card: Card) {
-    if (card.question == "" || card.answer == "") {
-      return;
+    ngOnInit(): void {
+        this.cardService.getCardsInStack(this.stack).subscribe((results) => (this.cards = results));
+        this.userService.GetCurrentUser().subscribe((result) => (this.user = result)); 
     }
-    card.stackId = this.stack.id;
-    this.cardService.createCard(card).subscribe();
-    this.cards.push(card)
-    this.card = new Card;
-  }
 
-  toggleStudy() {
-    if (this.cards.length > 0) {
-      this.study = !this.study;
-    } 
-  }
 
-  toggleEdit() {
-    this.edit = !this.edit;
-  }
-
-  saveEdit(card: Card) {
-    if (card.question == "" || card.answer == "") {
-      return;
+    createCard(card: Card) {
+        if (card.question == "" || card.answer == "") {
+            return;
+        }
+        card.stackId = this.stack.id;
+        this.cardService.createCard(card).subscribe(results => this.cards = results.filter(cards => cards.stackId == card.stackId));
+        this.card = new Card;
     }
-    this.cardService.upateCard(card).subscribe();
-    this.card.question = card.question;
-    this.card.answer = card.answer;
-    this.toggleEdit();
-    this.card = new Card;
-  }
+
+    deleteCard(card: Card) {
+        this.cardService.deleteCard(card).subscribe(results => this.cards = results.filter(cards => cards.stackId == card.stackId));
+    }
+
+    toggleStudy() {
+        if (this.cards.length > 0) {
+            this.study = !this.study;
+        } 
+    }
+
+    toggleEdit() {
+        this.edit = !this.edit;
+    }
+
+    saveEdit(card: Card) {
+        if (card.question == "" || card.answer == "") {
+            return;
+        }
+        this.cardService.upateCard(card).subscribe();
+        this.card.question = card.question;
+        this.card.answer = card.answer;
+        this.toggleEdit();
+        this.card = new Card;
+    }
 
 }
