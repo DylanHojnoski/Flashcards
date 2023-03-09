@@ -2,6 +2,8 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Stack } from 'src/app/models/stack';
 import { StackService } from 'src/app/services/stack.service'
 import { Pages } from 'src/app/models/pages';
+import { UserService } from 'src/app/services/user.service';
+import { User } from 'src/app/models/user';
 
 @Component({
   selector: 'app-stack',
@@ -20,7 +22,7 @@ export class StackComponent implements OnInit {
   editActive: boolean = false;
   search = "";
 
-  constructor(private stackService: StackService) { }
+  constructor(private stackService: StackService, private userService: UserService) { }
 
   ngOnInit(): void {
     // User stacks
@@ -40,6 +42,12 @@ export class StackComponent implements OnInit {
     if (!this.editActive) {
       this.selectedStackEvent.emit(stack)
     }
+  }
+
+  getStackOwner(stack: Stack): string {
+      let user: User = new User;
+      this.userService.GetUserById(stack).subscribe(result => user = result);
+      return user.name;
   }
 
   saveStack(stack: Stack) {

@@ -9,6 +9,9 @@
     <button *ngIf="(selectedTag == 'None' || selectedTag == stack.tag) && (search == '' || stack.name.toLowerCase().includes(search.toLowerCase()))"  (click)="selectStack(stack)" class="m-1 block h-64 w-64 rounded border bg-slate-100 p-3 drop-shadow-lg hover:scale-105 hover:bg-slate-200">
       <div *ngIf="!editActive">
         <h1 class="break-words text-center text-4xl">{{ stack.name }}</h1>
+        <div>
+            {{stack.userId}}
+        </div>
         <div *ngIf="stack.tag != ''" class="absolute bottom-2 right-2 w-20 rounded-2xl bg-blue-200 p-1 text-xs">
           {{stack.tag}}
         </div>

@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { User } from 'src/app/models/user';
 import { Observable } from 'rxjs/internal/Observable';
 import { environment } from 'src/environments/environment';
+import { Stack } from '../models/stack';
 
 @Injectable({
   providedIn: 'root'
@@ -40,5 +41,10 @@ export class UserService {
  Logout(): Observable<any> {
     const header = new HttpHeaders().set("Content-type", "application/json");
     return this.httpClient.get(environment.apiUrl + "/" + this.url + "/Logout",  { headers: header, withCredentials: true });
+  }
+
+ GetUserById(stack: Stack): Observable<any> {
+    const header = new HttpHeaders().set("Content-type", "application/json");
+    return this.httpClient.get(environment.apiUrl + "/" + this.url + "/GetUserById/" + stack.userId,  { headers: header, withCredentials: true });
   }
 }

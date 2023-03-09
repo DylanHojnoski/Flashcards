@@ -20,12 +20,14 @@ export class StackDetailsComponent implements OnInit {
     study = false;
     edit = false;
     user: User = new User; 
+    stackOwner: User = new User;
 
     constructor(private cardService: CardService, private userService: UserService) { }
 
     ngOnInit(): void {
         this.cardService.getCardsInStack(this.stack).subscribe((results) => (this.cards = results));
         this.userService.GetCurrentUser().subscribe((result) => (this.user = result)); 
+        this.setup();
     }
 
 
@@ -40,6 +42,22 @@ export class StackDetailsComponent implements OnInit {
 
     deleteCard(card: Card) {
         this.cardService.deleteCard(card).subscribe(results => this.cards = results.filter(cards => cards.stackId == card.stackId));
+    }
+
+  getUserName(user: User): Promise<User> {
+      return new Promise<User>(resolve => this.userService.GetUserByName(user).subscribe(result => {resolve(result)}));
+  }
+
+  async setup() {
+      this.stackOwner = await this.getOwnerName(this.stack);
+  }
+
+    getOwnerName(stack: Stack): Promise<User> {
+        return new Promise<User>(resolve => {
+            this.userService.GetUserById(stack).subscribe(result => {
+                resolve(result);
+            });
+        })
     }
 
     toggleStudy() {
